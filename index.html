@@ -3,148 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Redes - por Dervinis</title>
+    <title>Portal de Redes - Estilo Netflix</title>
     <style>
-        /* --- Reset Básico e Estilos Globais --- */
+        /* --- Reset e Tema Escuro --- */
+        :root {
+            --primary-color: #e50914; /* Vermelho Netflix */
+            --dark-color: #141414;
+            --light-dark-color: #1d1d1d;
+            --gray-color: #8c8c8c;
+            --light-color: #fff;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--dark-color);
+            color: var(--light-color);
             margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 20px;
         }
 
-        /* --- Cabeçalho e Navegação --- */
-        header {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 1rem 0;
-            border-bottom: 4px solid #3498db;
+        /* --- Cabeçalho (Navbar) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background-color: rgba(20, 20, 20, 0.8);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-sizing: border-box;
         }
-        header h1 {
-            text-align: center;
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        nav {
-            background-color: #34495e;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        nav a {
-            color: #ecf0f1;
-            text-decoration: none;
+        .navbar .logo {
+            font-size: 1.8rem;
             font-weight: bold;
-            margin: 0 15px;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
+            color: var(--primary-color);
+            text-decoration: none;
         }
-        nav a:hover {
-            color: #3498db;
+        .navbar .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+        .navbar .nav-links a:hover {
+            color: var(--gray-color);
         }
 
-        /* --- Conteúdo Principal --- */
-        main {
-            padding: 40px 0;
+        /* --- Seção Herói (Destaque Principal) --- */
+        .hero {
+            height: 80vh;
+            background-image: linear-gradient(to bottom, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 1) 100%), url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1931' );
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 4rem;
         }
-        .content-section {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
         }
-        .content-section h2 {
-            color: #3498db;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-            margin-top: 0;
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
         }
-        code {
-            background-color: #eef;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: "Courier New", Courier, monospace;
-        }
-        pre {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
+        .hero-content .btn {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
             border-radius: 5px;
-            overflow-x: auto; /* Garante que blocos de código não quebrem o layout */
+            transition: opacity 0.3s;
+        }
+        .hero-content .btn:hover {
+            opacity: 0.8;
+        }
+
+        /* --- Seção de Cursos (Carrosséis) --- */
+        .courses-section {
+            padding: 1rem 0;
+        }
+        .category-row {
+            padding: 0 4rem;
+            margin-bottom: 3rem;
+        }
+        .category-row h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .courses-carousel {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 20px; /* Espaço para a barra de rolagem */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: var(--primary-color) var(--dark-color); /* Firefox */
+        }
+        /* Estilizando a barra de rolagem para Chrome/Safari */
+        .courses-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+        .courses-carousel::-webkit-scrollbar-track {
+            background: var(--dark-color);
+        }
+        .courses-carousel::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        /* --- Card do Curso --- */
+        .course-card {
+            flex: 0 0 280px; /* Não encolhe, não cresce, base de 280px */
+            height: 160px;
+            margin-right: 10px;
+            background-color: var(--light-dark-color);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease, z-index 0.3s ease;
+            cursor: pointer;
+        }
+        .course-card:hover {
+            transform: scale(1.15);
+            z-index: 10;
+        }
+        .course-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .course-card .card-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px 10px 10px 10px;
+            font-weight: bold;
         }
 
         /* --- Rodapé --- */
         footer {
             text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-            background-color: #34495e;
-            color: #ecf0f1;
-        }
-        footer a {
-            color: #3498db;
-            text-decoration: none;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--light-dark-color);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>Portal de Redes</h1>
-        </div>
-    </header>
-
-    <nav>
-        <div class="container">
-            <!-- SEUS LINKS FICAM AQUI -->
+    <nav class="navbar">
+        <a href="#" class="logo">PortalRedes</a>
+        <div class="nav-links">
             <a href="#">Início</a>
-            <a href="https://github.com/dervinis/portalredes" target="_blank">Código Fonte</a>
-            <a href="https://github.com/dervinis" target="_blank">Sobre o Autor</a>
+            <a href="#">Trilhas</a>
+            <a href="#">Sobre</a>
         </div>
     </nav>
 
-    <main>
-        <div class="container">
-            <section class="content-section">
-                <h2>Bem-vindo!</h2>
-                <p>
-                    Este é o seu hub de conhecimento para aprender sobre redes de computadores, do básico ao avançado, com uma abordagem totalmente prática.
-                </p>
-                <p>
-                    O objetivo deste projeto é fornecer material de estudo gratuito e de alta qualidade para todos que desejam ingressar na área de infraestrutura e redes.
-                </p>
-            </section>
-
-            <section class="content-section">
-                <h2>Trilha de Estudos: CCNA 200-301</h2>
-                <p>Atualmente, o foco principal é a criação de conteúdo para a certificação Cisco CCNA. Abaixo estão os tópicos em desenvolvimento:</p>
-                <ul>
-                    <li><strong>Fundamentos de Redes:</strong> O que são switches, roteadores e o modelo OSI.</li>
-                    <li><strong>Endereçamento IP:</strong> Dominando IPv4, sub-redes e VLSM.</li>
-                    <li><strong>Protocolos de Roteamento:</strong> Configuração prática de OSPF.</li>
-                </ul>
-                <p>Exemplo de configuração de interface em um roteador Cisco:</p>
-                <pre><code>Router> enable
-Router# configure terminal
-Router(config)# interface GigabitEthernet0/0
-Router(config-if)# ip address 192.168.1.1 255.255.255.0
-Router(config-if)# no shutdown
-Router(config-if)# exit</code></pre>
-            </section>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>CCNA 200-301: Do Zero à Prática</h1>
+            <p>Domine os fundamentos de redes, aprenda a configurar roteadores e switches Cisco e prepare-se para uma das certificações mais importantes do mercado.</p>
+            <a href="#" class="btn">Comece a Estudar Agora</a>
         </div>
+    </header>
+
+    <main class="courses-section">
+        <!-- Categoria 1: Trilha CCNA -->
+        <section class="category-row">
+            <h2>Trilha CCNA 200-301</h2>
+            <div class="courses-carousel">
+                <!-- Cards dos cursos -->
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070" alt="Fundamentos de Redes">
+                    <div class="card-title">1. Fundamentos de Redes</div>
+                </div>
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=2070" alt="Endereçamento IP">
+                    <div class="card-title">2. Endereçamento IP</div>
+                </div>
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1614028674022-281521644542?q=80&w=1974" alt="Roteamento OSPF">
+                    <div class="card-title">3. Roteamento OSPF</div>
+                </div>
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070" alt="Switching e VLANs">
+                    <div class="card-title">4. Switching e VLANs</div>
+                </div>
+                <!-- Adicione mais cards aqui -->
+            </div>
+        </section>
+
+        <!-- Categoria 2: Segurança -->
+        <section class="category-row">
+            <h2>Segurança de Redes</h2>
+            <div class="courses-carousel">
+                <!-- Cards dos cursos -->
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070" alt="Introdução a Firewalls">
+                    <div class="card-title">1. Introdução a Firewalls</div>
+                </div>
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1618060932014-4deda4932554?q=80&w=1932" alt="VPNs: Site-to-Site e Acesso Remoto">
+                    <div class="card-title">2. VPNs: Site-to-Site</div>
+                </div>
+                <!-- Adicione mais cards aqui -->
+            </div>
+        </section>
+        
+        <!-- Adicione mais categorias aqui -->
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Portal de Redes. Desenvolvido por <a href="https://github.com/dervinis" target="_blank">Dervinis</a>.</p>
-        </div>
+        <p>&copy; 2025 Portal de Redes. Criado por Dervinis.</p>
     </footer>
 
 </body>
