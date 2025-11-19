@@ -153,6 +153,48 @@
             margin-top: 3rem;
             border-top: 1px solid var(--light-dark-color);
         }
+                /* --- MEDIA QUERIES PARA RESPONSIVIDADE (CELULARES) --- */
+        @media (max-width: 768px) {
+            /* Ajusta o espaçamento geral */
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+            .hero {
+                padding: 0 1.5rem;
+                height: 60vh; /* Diminui a altura no celular */
+            }
+            .category-row {
+                padding: 0 1.5rem;
+            }
+
+            /* Ajusta o tamanho das fontes */
+            .navbar .logo {
+                font-size: 1.5rem;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            /* --- O AJUSTE PRINCIPAL DO MENU (NAVBAR) --- */
+            .navbar .nav-links {
+                display: none; /* Esconde os links por padrão em telas pequenas */
+                /* No futuro, podemos adicionar um botão "menu hambúrguer" para mostrá-los */
+            }
+
+            /* --- AJUSTE DOS CARDS DE CURSO --- */
+            .course-card {
+                flex: 0 0 220px; /* Diminui o tamanho do card no celular */
+                height: 125px;
+            }
+            /* Desativa o efeito de zoom no hover para dispositivos de toque */
+            .course-card:hover {
+                transform: none;
+                z-index: auto;
+            }
+        }
     </style>
 </head>
 <body>
