@@ -1,16 +1,415 @@
-<script>
-    window.$docsify = {
-      name: 'Portal de Redes',
-      // Removemos o 'alias' que estava causando conflito
-      loadSidebar: true 
-    }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Topologia de Rede - Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        strong {
+            color: #0056b3;
+        }
+        
+        /* Estilos de Navegação (Simples) */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding: 10px 0;
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .nav-menu a:hover {
+            background-color: #003d7a;
+        }
 
-  window.$docsify = {
-      name: 'Portal de Redes',
-      loadSidebar: true,
-      // Adicione esta linha, substituindo "nome-do-repositorio" pelo nome do seu repositório no GitHub
-      basePath: '/nome-do-repositorio/' 
-    }
-  </script>
+        /* Estilos da Topologia (Reutilizados do código anterior) */
+        .topology-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+            position: relative;
+        }
+        .layer {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            width: 100%;
+            padding: 10px 0;
+            border-radius: 5px;
+        }
+        .layer-core {
+            background-color: #e0f7fa;
+            border: 2px solid #00bcd4;
+        }
+        .layer-distribution {
+            background-color: #e8f5e9;
+            border: 2px solid #4caf50;
+        }
+        .layer-access {
+            background-color: #fff3e0;
+            border: 2px solid #ff9800;
+        }
+        .layer-industrial {
+            background-color: #ffebee;
+            border: 2px solid #f44336;
+            margin-top: 20px;
+        }
+        .segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+        }
+        .device {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            text-align: center;
+            font-size: 0.9em;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+        .device-core { background-color: #00bcd4; }
+        .device-distribution { background-color: #4caf50; }
+        .device-access { background-color: #ff9800; }
+        .device-firewall { background-color: #f44336; }
+        .device-loadbalance { background-color: #9c27b0; }
+        .device-server { background-color: #607d8b; }
+        .device-industrial { background-color: #ff5722; }
 
+        .connection-line {
+            height: 30px;
+            width: 2px;
+            background-color: #666;
+            margin: 0 auto;
+        }
+        .horizontal-connection {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            position: relative;
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
+        .distribution-segment {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .distribution-cluster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+        }
+        .distribution-switches {
+            display: flex;
+            justify-content: center;
+        }
+        .firewall-lb-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+        }
+        .firewall-lb-group .device {
+            margin-bottom: 10px;
+        }
+        .industrial-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+            border: 1px dashed #f44336;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .industrial-switches {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .industrial-access-group {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .industrial-access-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 10px;
+        }
+        .equipment-list table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .equipment-list th, .equipment-list td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .equipment-list th {
+            background-color: #0056b3;
+            color: white;
+        }
+        .equipment-list tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .equipment-list tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="container">
+        
+        <div class="nav-menu">
+            <a href="#introducao">Introdução e Conceitos</a>
+            <a href="#topologia">Topologia de Rede</a>
+        </div>
+
+        <!-- SEÇÃO 1: INTRODUÇÃO E CONCEITOS -->
+        <section id="introducao">
+            <h1>Bem-vindo à Company!</h1>
+            <h2>Seu Primeiro Dia como Analista de Redes Júnior</h2>
+            <p>Parabéns! Você acaba de ser contratado como **Analista de Redes Júnior** na **Company**. Este é um cenário simulado para que você possa aplicar e desenvolver seus conhecimentos em um ambiente de rede que espelha a complexidade do mundo real.</p>
+            <p>Sua missão inicial é se familiarizar com a infraestrutura, realizar correções e executar tarefas operacionais. Seu objetivo é evoluir para o cargo de Analista Sênior, responsável por sustentar e otimizar todo o ambiente.</p>
+
+            <h3>Conceitos Fundamentais de Topologias de Rede</h3>
+
+            <h4>Topologia de Duas Camadas (Collapsed Core)</h4>
+            <p>Em redes menores ou mais simples, a topologia de duas camadas combina as funções das camadas Core e Distribuição em um único conjunto de switches de alto desempenho. Essa estrutura é conhecida como **Collapsed Core**.</p>
+            <ul>
+                <li><strong>Camadas:</strong> Acesso e Core/Distribuição (combinadas).</li>
+                <li><strong>Vantagens:</strong> Menor custo, menor complexidade, menor latência (menos saltos).</li>
+                <li><strong>Desvantagens:</strong> Menor escalabilidade, menos flexibilidade, maior impacto de falhas (um switch falho afeta duas funções).</li>
+            </ul>
+
+            <h4>Topologia de Três Camadas (Hierárquica)</h4>
+            <p>A topologia de três camadas divide a rede em três funções lógicas distintas: **Acesso, Distribuição e Core**. É o modelo mais comum em grandes redes corporativas e é o que você encontrará na Company.</p>
+            <ul>
+                <li><strong>Camada de Acesso:</strong> Conecta dispositivos finais (PCs, impressoras, servidores) e aplica políticas de segurança e QoS.</li>
+                <li><strong>Camada de Distribuição:</strong> Agrega o tráfego da camada de Acesso, implementa políticas de roteamento, VLANs e segurança (ACLs, Firewalls). Atua como um limite de roteamento.</li>
+                <li><strong>Camada Core:</strong> Fornece transporte de alta velocidade e baixa latência entre os switches de Distribuição. O Core deve ser rápido e estável, sem processamento de políticas.</li>
+            </ul>
+
+            <h4>Por que a Topologia de Três Camadas foi Escolhida para a Company?</h4>
+            <p>A escolha da topologia de três camadas para a Company é justificada pela necessidade de:</p>
+            <ol>
+                <li><strong>Escalabilidade:</strong> Permite adicionar novos switches de Acesso ou Distribuição sem afetar o Core.</li>
+                <li><strong>Redundância:</strong> A separação das camadas facilita a implementação de redundância em cada nível (ex: dois switches Core, dois de Distribuição).</li>
+                <li><strong>Gerenciamento de Políticas:</strong> As políticas de segurança e roteamento são centralizadas na camada de Distribuição, simplificando o gerenciamento e a solução de problemas.</li>
+                <li><strong>Segregação de Ambientes:</strong> A camada de Distribuição permite segregar o ambiente Corporativo do ambiente Industrial (OT), aplicando regras de Firewall e roteamento específicas entre eles.</li>
+            </ol>
+
+            <h3>Conceito Avançado: Topologia Spine-Leaf (CCNA)</h3>
+            <p>Embora a Company utilize o modelo hierárquico tradicional, é crucial conhecer a arquitetura **Spine-Leaf**, que é o padrão moderno em Data Centers e redes de grande escala, e um tópico importante para a certificação CCNA.</p>
+            <p>A arquitetura Spine-Leaf é uma topologia de duas camadas que resolve problemas de latência e largura de banda do modelo hierárquico tradicional em ambientes de Data Center:</p>
+            <ul>
+                <li><strong>Spine (Espinha):</strong> Atua como o backbone da rede. Todos os switches Spine se conectam a todos os switches Leaf.</li>
+                <li><strong>Leaf (Folha):</strong> Conecta os servidores e dispositivos finais. Cada switch Leaf se conecta a todos os switches Spine.</li>
+                <li><strong>Vantagem Chave:</strong> Garante que qualquer servidor conectado a um switch Leaf possa alcançar qualquer outro servidor em outro switch Leaf em apenas **dois saltos** (Leaf -> Spine -> Leaf). Isso resulta em latência previsível e alta largura de banda.</li>
+                <li><strong>Protocolo Comum:</strong> Frequentemente utiliza protocolos de roteamento de Camada 3 (como OSPF ou BGP) e tecnologias como o **VXLAN** para estender a Camada 2 (VLANs) sobre a Camada 3, eliminando a necessidade do Spanning Tree Protocol (STP) e permitindo o uso de todos os links disponíveis (ECMP - Equal-Cost Multi-Path).</li>
+            </ul>
+        </section>
+
+        <!-- SEÇÃO 2: TOPOLOGIA DE REDE -->
+        <section id="topologia">
+            <h1>Topologia de Rede da Company</h1>
+            <p>Abaixo está a representação visual da topologia de rede da Company, dividida em ambientes Corporativo e Industrial (OT), seguindo o modelo hierárquico de 3 camadas.</p>
+
+            <div class="topology-diagram">
+
+                <!-- CAMADA CORE -->
+                <div class="layer layer-core">
+                    <div class="segment">
+                        <h2>Camada Core</h2>
+                        <div class="device device-core">Core Switch 1 (CSW-01)</div>
+                        <div class="device device-core">Core Switch 2 (CSW-02)</div>
+                    </div>
+                </div>
+
+                <!-- Conexão Core para Distribuição -->
+                <div class="connection-line" style="height: 50px;"></div>
+
+                <!-- CAMADA DISTRIBUIÇÃO (Corporativa e Industrial) -->
+                <div class="layer layer-distribution">
+                    <h2>Camada Distribuição</h2>
+                    <div class="distribution-segment">
+
+                        <!-- Cluster Corporativo -->
+                        <div class="distribution-cluster">
+                            <h3>Corporativo</h3>
+                            <div class="distribution-switches">
+                                <div class="device device-distribution">Dist. Switch 1 (DSW-C01)</div>
+                                <div class="device device-distribution">Dist. Switch 2 (DSW-C02)</div>
+                            </div>
+                            <div class="firewall-lb-group">
+                                <!-- Firewall ligado entre Core e Distribuição (Representação Conceitual) -->
+                                <div class="device device-firewall">Firewall (FW-01)</div>
+                                <!-- Load Balancer na Distribuição -->
+                                <div class="device device-loadbalance">Load Balancer (LB-01)</div>
+                            </div>
+                        </div>
+
+                        <!-- Conexão entre Clusters (Representação Conceitual) -->
+                        <div class="connection-line" style="height: 100px; margin: 0 50px;"></div>
+
+                        <!-- Cluster Industrial -->
+                        <div class="distribution-cluster industrial-segment">
+                            <h3>Industrial (DMZ)</h3>
+                            <div class="industrial-switches">
+                                <div class="device device-distribution device-industrial">Dist. Switch 3 (DSW-I01)</div>
+                                <div class="device device-distribution device-industrial">Dist. Switch 4 (DSW-I02)</div>
+                            </div>
+                            <p class="label">Conexão entre DSW-I01 e DSW-I02</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Conexão Distribuição Corporativa para Acesso Corporativo -->
+                <div class="connection-line" style="height: 50px;"></div>
+
+                <!-- CAMADA ACESSO (Corporativa) -->
+                <div class="layer layer-access">
+                    <h2>Camada Acesso (Corporativa)</h2>
+                    <div class="horizontal-connection">
+                        <div class="segment">
+                            <div class="device device-access">Access Switch 1 (ASW-C01)</div>
+                            <div class="device device-access">Access Switch 2 (ASW-C02)</div>
+                        </div>
+                        <div class="segment">
+                            <div class="device device-access">Access Switch 3 (ASW-C03)</div>
+                            <div class="device device-access">Access Switch 4 (ASW-C04)</div>
+                        </div>
+                        <div class="segment">
+                            <div class="device device-access">Access Switch 5 (ASW-C05)</div>
+                            <div class="device device-access">Access Switch 6 (ASW-C06)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conexão Distribuição Industrial para Acesso Industrial -->
+                <div class="connection-line" style="height: 50px;"></div>
+
+                <!-- CAMADA ACESSO (Industrial) -->
+                <div class="layer layer-industrial">
+                    <h2>Camada Acesso (Industrial)</h2>
+                    <div class="industrial-access-group">
+                        <div class="industrial-access-segment">
+                            <div class="device device-access device-industrial">Access Switch 7 (ASW-I01)</div>
+                            <div class="connection-line" style="height: 20px;"></div>
+                            <div class="device device-server">Servidor 1 (SRV-I01)</div>
+                        </div>
+                        <div class="industrial-access-segment">
+                            <div class="device device-access device-industrial">Access Switch 8 (ASW-I02)</div>
+                            <div class="connection-line" style="height: 20px;"></div>
+                            <div class="device device-server">Servidor 2 (SRV-I02)</div>
+                        </div>
+                        <div class="industrial-access-segment">
+                            <div class="device device-access device-industrial">Access Switch 9 (ASW-I03)</div>
+                            <div class="connection-line" style="height: 20px;"></div>
+                            <div class="device device-server">Servidor 3 (SRV-I03)</div>
+                        </div>
+                        <div class="industrial-access-segment">
+                            <div class="device device-access device-industrial">Access Switch 10 (ASW-I04)</div>
+                            <div class="connection-line" style="height: 20px;"></div>
+                            <div class="device device-server">Servidor 4 (SRV-I04)</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- LISTA DE EQUIPAMENTOS E ENDEREÇAMENTO IP -->
+            <div class="equipment-list">
+                <h2>Lista de Equipamentos e Endereçamento IP</h2>
+                <p><strong>Nota:</strong> O endereçamento IP é um exemplo conceitual. As máscaras de sub-rede e gateways seriam definidos em um projeto real.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Equipamento</th>
+                            <th>Função</th>
+                            <th>Endereço IP (Exemplo)</th>
+                            <th>VLAN/Sub-rede (Exemplo)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Core Layer -->
+                        <tr><td>CSW-01</td><td>Core Switch 1</td><td>Agregação de Distribuição</td><td>10.0.0.1</td><td>VLAN 100 (Core)</td></tr>
+                        <tr><td>CSW-02</td><td>Core Switch 2</td><td>Agregação de Distribuição</td><td>10.0.0.2</td><td>VLAN 100 (Core)</td></tr>
+                        <!-- Corporate Distribution Layer -->
+                        <tr><td>DSW-C01</td><td>Dist. Switch Corporativo 1</td><td>Roteamento/Segurança</td><td>172.16.10.1</td><td>VLAN 10 (Dados)</td></tr>
+                        <tr><td>DSW-C02</td><td>Dist. Switch Corporativo 2</td><td>Roteamento/Segurança</td><td>172.16.10.2</td><td>VLAN 10 (Dados)</td></tr>
+                        <tr><td>FW-01</td><td>Firewall</td><td>Segurança Perimetral</td><td>172.16.20.1</td><td>VLAN 20 (DMZ/FW)</td></tr>
+                        <tr><td>LB-01</td><td>Load Balancer</td><td>Distribuição de Carga</td><td>172.16.30.1</td><td>VLAN 30 (Serviços)</td></tr>
+                        <!-- Corporate Access Layer -->
+                        <tr><td>ASW-C01</td><td>Access Switch 1</td><td>Conexão de Usuários</td><td>192.168.1.254</td><td>VLAN 1 (Usuários)</td></tr>
+                        <tr><td>ASW-C02</td><td>Access Switch 2</td><td>Conexão de Usuários</td><td>192.168.2.254</td><td>VLAN 2 (Usuários)</td></tr>
+                        <tr><td>ASW-C03</td><td>Access Switch 3</td><td>Conexão de Usuários</td><td>192.168.3.254</td><td>VLAN 3 (Usuários)</td></tr>
+                        <tr><td>ASW-C04</td><td>Access Switch 4</td><td>Conexão de Usuários</td><td>192.168.4.254</td><td>VLAN 4 (Usuários)</td></tr>
+                        <tr><td>ASW-C05</td><td>Access Switch 5</td><td>Conexão de Usuários</td><td>192.168.5.254</td><td>VLAN 5 (Usuários)</td></tr>
+                        <tr><td>ASW-C06</td><td>Access Switch 6</td><td>Conexão de Usuários</td><td>192.168.6.254</td><td>VLAN 6 (Usuários)</td></tr>
+                        <!-- Industrial Distribution Layer -->
+                        <tr><td>DSW-I01</td><td>Dist. Switch Industrial 1</td><td>Roteamento/Segurança Industrial</td><td>10.10.10.1</td><td>VLAN 100 (Industrial)</td></tr>
+                        <tr><td>DSW-I02</td><td>Dist. Switch Industrial 2</td><td>Roteamento/Segurança Industrial</td><td>10.10.10.2</td><td>VLAN 100 (Industrial)</td></tr>
+                        <!-- Industrial Access Layer & Servers -->
+                        <tr><td>ASW-I01</td><td>Access Switch Industrial 1</td><td>Conexão de Servidores</td><td>10.10.20.254</td><td>VLAN 20 (Servidores Ind. 1)</td></tr>
+                        <tr><td>SRV-I01</td><td>Servidor 1</td><td>Aplicação Industrial</td><td>10.10.20.1</td><td>VLAN 20 (Servidores Ind. 1)</td></tr>
+                        <tr><td>ASW-I02</td><td>Access Switch Industrial 2</td><td>Conexão de Servidores</td><td>10.10.30.254</td><td>VLAN 30 (Servidores Ind. 2)</td></tr>
+                        <tr><td>SRV-I02</td><td>Servidor 2</td><td>Aplicação Industrial</td><td>10.10.30.1</td><td>VLAN 30 (Servidores Ind. 2)</td></tr>
+                        <tr><td>ASW-I03</td><td>Access Switch Industrial 3</td><td>Conexão de Servidores</td><td>10.10.40.254</td><td>VLAN 40 (Servidores Ind. 3)</td></tr>
+                        <tr><td>SRV-I03</td><td>Servidor 3</td><td>Aplicação Industrial</td><td>10.10.40.1</td><td>VLAN 40 (Servidores Ind. 3)</td></tr>
+                        <tr><td>ASW-I04</td><td>Access Switch Industrial 4</td><td>Conexão de Servidores</td><td>10.10.50.254</td><td>VLAN 50 (Servidores Ind. 4)</td></tr>
+                        <tr><td>SRV-I04</td><td>Servidor 4</td><td>Aplicação Industrial</td><td>10.10.50.1</td><td>VLAN 50 (Servidores Ind. 4)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
