@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Redes - Estilo Netflix</title>
+    <title>Portal de Redes - por Dervinis</title>
     <style>
         /* --- Reset e Tema Escuro --- */
         :root {
@@ -96,23 +96,46 @@
             font-size: 1.5rem;
             margin-bottom: 1rem;
         }
+        
+        /* --- Estilos do Carrossel com Botões --- */
+        .carousel-container {
+            position: relative;
+        }
         .courses-carousel {
             display: flex;
             overflow-x: auto;
-            padding-bottom: 20px; /* Espaço para a barra de rolagem */
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: var(--primary-color) var(--dark-color); /* Firefox */
+            scroll-behavior: smooth; /* Efeito de rolagem suave! */
+            scrollbar-width: none; /* Esconde a barra de rolagem no Firefox */
         }
-        /* Estilizando a barra de rolagem para Chrome/Safari */
+        /* Esconde a barra de rolagem no Chrome/Safari */
         .courses-carousel::-webkit-scrollbar {
-            height: 8px;
+            display: none;
         }
-        .courses-carousel::-webkit-scrollbar-track {
-            background: var(--dark-color);
+        .carousel-btn {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(20, 20, 20, 0.6);
+            color: var(--light-color);
+            border: none;
+            width: 50px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 20;
+            opacity: 0; /* Botões ficam invisíveis por padrão */
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .courses-carousel::-webkit-scrollbar-thumb {
-            background-color: var(--primary-color);
-            border-radius: 10px;
+        .carousel-container:hover .carousel-btn {
+            opacity: 1; /* Botões aparecem quando o mouse está sobre o carrossel */
+        }
+        .carousel-btn.prev {
+            left: 0;
+        }
+        .carousel-btn.next {
+            right: 0;
         }
 
         /* --- Card do Curso --- */
@@ -153,7 +176,8 @@
             margin-top: 3rem;
             border-top: 1px solid var(--light-dark-color);
         }
-                /* --- MEDIA QUERIES PARA RESPONSIVIDADE (CELULARES) --- */
+
+        /* --- MEDIA QUERIES PARA RESPONSIVIDADE (CELULARES) --- */
         @media (max-width: 768px) {
             /* Ajusta o espaçamento geral */
             .navbar {
@@ -178,13 +202,15 @@
                 font-size: 1rem;
             }
 
-            /* --- O AJUSTE PRINCIPAL DO MENU (NAVBAR) --- */
+            /* Oculta os links do menu principal e os botões do carrossel em telas de toque */
             .navbar .nav-links {
-                display: none; /* Esconde os links por padrão em telas pequenas */
-                /* No futuro, podemos adicionar um botão "menu hambúrguer" para mostrá-los */
+                display: none;
+            }
+            .carousel-btn {
+                display: none; /* Esconde as setas em dispositivos móveis, pois a rolagem é feita com o dedo */
             }
 
-            /* --- AJUSTE DOS CARDS DE CURSO --- */
+            /* AJUSTE DOS CARDS DE CURSO */
             .course-card {
                 flex: 0 0 220px; /* Diminui o tamanho do card no celular */
                 height: 125px;
@@ -220,51 +246,89 @@
         <!-- Categoria 1: Trilha CCNA -->
         <section class="category-row">
             <h2>Trilha CCNA 200-301</h2>
-            <div class="courses-carousel">
-                <!-- Cards dos cursos -->
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070" alt="Fundamentos de Redes">
-                    <div class="card-title">1. Fundamentos de Redes</div>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" aria-label="Anterior">&#10094;</button>
+                <div class="courses-carousel">
+                    <!-- Cards dos cursos -->
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070" alt="Fundamentos de Redes">
+                        <div class="card-title">1. Fundamentos de Redes</div>
+                    </div>
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=2070" alt="Endereçamento IP">
+                        <div class="card-title">2. Endereçamento IP</div>
+                    </div>
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1614028674022-281521644542?q=80&w=1974" alt="Roteamento OSPF">
+                        <div class="card-title">3. Roteamento OSPF</div>
+                    </div>
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070" alt="Switching e VLANs">
+                        <div class="card-title">4. Switching e VLANs</div>
+                    </div>
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1563729831-65413c1b20b7?q=80&w=1974" alt="Listas de Controle de Acesso">
+                        <div class="card-title">5. Listas de Acesso (ACL )</div>
+                    </div>
                 </div>
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=2070" alt="Endereçamento IP">
-                    <div class="card-title">2. Endereçamento IP</div>
-                </div>
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1614028674022-281521644542?q=80&w=1974" alt="Roteamento OSPF">
-                    <div class="card-title">3. Roteamento OSPF</div>
-                </div>
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070" alt="Switching e VLANs">
-                    <div class="card-title">4. Switching e VLANs</div>
-                </div>
-                <!-- Adicione mais cards aqui -->
+                <button class="carousel-btn next" aria-label="Próximo">&#10095;</button>
             </div>
         </section>
 
         <!-- Categoria 2: Segurança -->
         <section class="category-row">
             <h2>Segurança de Redes</h2>
-            <div class="courses-carousel">
-                <!-- Cards dos cursos -->
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070" alt="Introdução a Firewalls">
-                    <div class="card-title">1. Introdução a Firewalls</div>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" aria-label="Anterior">&#10094;</button>
+                <div class="courses-carousel">
+                    <!-- Cards dos cursos -->
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070" alt="Introdução a Firewalls">
+                        <div class="card-title">1. Introdução a Firewalls</div>
+                    </div>
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1618060932014-4deda4932554?q=80&w=1932" alt="VPNs: Site-to-Site e Acesso Remoto">
+                        <div class="card-title">2. VPNs: Site-to-Site</div>
+                    </div>
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1544890225-2fde0e66f054?q=80&w=1991" alt="Sistemas de Detecção de Intrusão">
+                        <div class="card-title">3. IDS/IPS</div>
+                    </div>
                 </div>
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1618060932014-4deda4932554?q=80&w=1932" alt="VPNs: Site-to-Site e Acesso Remoto">
-                    <div class="card-title">2. VPNs: Site-to-Site</div>
-                </div>
-                <!-- Adicione mais cards aqui -->
+                <button class="carousel-btn next" aria-label="Próximo">&#10095;</button>
             </div>
         </section>
-        
-        <!-- Adicione mais categorias aqui -->
     </main>
 
     <footer>
         <p>&copy; 2025 Portal de Redes. Criado por Dervinis.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function( ) {
+            // Encontra todos os containers de carrossel na página
+            const carousels = document.querySelectorAll('.carousel-container');
+
+            carousels.forEach(container => {
+                const carousel = container.querySelector('.courses-carousel');
+                const prevBtn = container.querySelector('.carousel-btn.prev');
+                const nextBtn = container.querySelector('.carousel-btn.next');
+
+                // Evento de clique para o botão "Próximo"
+                nextBtn.addEventListener('click', () => {
+                    // Calcula quanto rolar (80% da largura visível do carrossel)
+                    const scrollAmount = carousel.clientWidth * 0.8;
+                    carousel.scrollLeft += scrollAmount;
+                });
+
+                // Evento de clique para o botão "Anterior"
+                prevBtn.addEventListener('click', () => {
+                    const scrollAmount = carousel.clientWidth * 0.8;
+                    carousel.scrollLeft -= scrollAmount;
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
