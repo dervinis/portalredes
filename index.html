@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Portal Redes</title>
+  <title>Portal de Redes</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Portal de Redes e Segurança utilizando Docsify no GitHub Pages">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -16,18 +16,17 @@
     window.$docsify = {
       name: 'Portal de Redes',
       
-      // Essencial para carregar o _sidebar.md
+      // ⚠️ Use 'sidebar' para especificar o novo nome do arquivo. 
+      // O Docsify tentará carregar este arquivo.
+      sidebar: 'menu-lateral.md', 
+      
+      // Deve ser 'true' para indicar que uma barra lateral deve ser carregada.
       loadSidebar: true, 
       
-      // Caminho Base para repositórios do GitHub Pages
-      // VOCÊ DEVE ALTERAR 'NOME_DO_REPOSITORIO' para o nome do seu repositório.
-      // Ex: Se o repositório é 'portal-de-redes', use: basePath: '/portal-de-redes/'
-      basePath: '/portalredes/', 
+      // Não se esqueça de ajustar ou remover o basePath
+      // Ex: basePath: '/NOME_DO_REPOSITORIO/'
       
-      // Inicia a renderização no arquivo README.md (padrão)
       homepage: 'README.md',
-      
-      // Profundidade dos cabeçalhos renderizados na Table of Contents (TOC)
       subMaxLevel: 3 
     }
   </script>
