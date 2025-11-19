@@ -1,25 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Portal de Redes</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Aprenda redes de computadores de forma prática.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos de Redes e Programação - Início</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">Carregando...</div>
-  <script>
-    window.$docsify = {
-      name: 'Portal de Redes',
-      // Ativa o carregamento do menu superior
-      loadNavbar: true,
-      // Desativa o carregamento do menu lateral (opcional, mas bom para clareza )
-      loadSidebar: false
-    }
-  </script>
-  <!-- Carrega os scripts do Docsify -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+
+    <div class="container">
+        
+        <!-- Menu Lateral -->
+        <div class="sidebar">
+            <h2>Cursos</h2>
+            <a href="index.html" class="active">Início</a>
+            
+            <h2>CCNA</h2>
+            <a href="ccna.html">1. Introdução ao CCNA</a>
+            <a href="#">2. Fundamentos de Rede</a>
+            <a href="#">3. Endereçamento IP</a>
+            <a href="#">4. Roteamento Estático</a>
+            <a href="#">5. VLANs e Trunking</a>
+
+            <h2>CCNP</h2>
+            <a href="#">1. Introdução ao CCNP</a>
+            <a href="#">2. Roteamento Avançado</a>
+            <a href="#">3. Tecnologias WAN</a>
+
+            <h2>Python</h2>
+            <a href="#">1. Introdução ao Python</a>
+            <a href="#">2. Estruturas de Dados</a>
+            <a href="#">3. Automação de Redes</a>
+            
+            <!-- Adicione mais cursos aqui -->
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="content">
+            <h1>Bem-vindo à Plataforma de Cursos de TI!</h1>
+            <p>Esta plataforma foi desenvolvida para simular um ambiente de aprendizado completo, focado em Redes e Programação, seguindo um estilo de navegação similar ao W3Schools.</p>
+            
+            <h2>Como Funciona?</h2>
+            <p>Utilize o menu lateral à esquerda para navegar entre os diferentes cursos e módulos. Cada link leva a uma página de conteúdo específica, permitindo que você avance no seu aprendizado de forma estruturada.</p>
+            
+            <p>Os cursos de **CCNA** e **CCNP** focam em conceitos de redes de computadores, topologias, protocolos e configurações de equipamentos. O curso de **Python** foca em programação e sua aplicação na automação de redes (NetDevOps).</p>
+
+            <h2>Próximos Passos</h2>
+            <p>Para começar, clique no link **"1. Introdução ao CCNA"** no menu lateral.</p>
+
+            <div class="nav-buttons">
+                <a href="#" class="prev" style="visibility: hidden;">Anterior</a>
+                <a href="ccna.html" class="next">Próximo Módulo &raquo;</a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
