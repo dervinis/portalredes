@@ -2,10 +2,11 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Portal de Redes</title>
+  <title>Portal Redes</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
+  <meta name="description" content="Portal de Redes e Segurança utilizando Docsify no GitHub Pages">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 <body>
@@ -14,20 +15,24 @@
   <script>
     window.$docsify = {
       name: 'Portal de Redes',
-      loadSidebar: true, // Garante que _sidebar.md seja carregado
-      // basePath: '/nome-do-repositorio/' // Use se o site for hosted em um subdiretório
+      
+      // Essencial para carregar o _sidebar.md
+      loadSidebar: true, 
+      
+      // Caminho Base para repositórios do GitHub Pages
+      // VOCÊ DEVE ALTERAR 'NOME_DO_REPOSITORIO' para o nome do seu repositório.
+      // Ex: Se o repositório é 'portal-de-redes', use: basePath: '/portal-de-redes/'
+      basePath: '/portalredes/', 
+      
+      // Inicia a renderização no arquivo README.md (padrão)
+      homepage: 'README.md',
+      
+      // Profundidade dos cabeçalhos renderizados na Table of Contents (TOC)
+      subMaxLevel: 3 
     }
   </script>
   
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  
-  <script src="assets/js/custom.js"></script>
-  
-  <script>
-    console.log('Docsify carregado e pronto para uso!');
-    // Adicione seu código JavaScript simples aqui
-  </script>
 
 </body>
 </html>
-
