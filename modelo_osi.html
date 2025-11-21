@@ -1,1 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título do Artigo - Portal de Redes</title>
+    <style>
+        /* --- Reset e Tema Escuro (Consistente com as outras páginas) --- */
+        :root {
+            --primary-color: #e50914; /* Vermelho Netflix */
+            --dark-color: #141414;
+            --light-dark-color: #1d1d1d;
+            --gray-color: #8c8c8c;
+            --light-color: #fff;
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            margin: 0;
+        }
 
+        /* --- Barra de Navegação (Copiada da index.html) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background-color: rgba(20, 20, 20, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-sizing: border-box;
+            border-bottom: 1px solid var(--light-dark-color);
+        }
+        .navbar .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .navbar .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+        .navbar .nav-links a:hover {
+            color: var(--gray-color);
+        }
+
+        /* --- Container Principal do Artigo --- */
+        .article-container {
+            max-width: 800px; /* Largura ideal para leitura */
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem 2rem; /* Espaçamento para não ficar sob a navbar */
+        }
+
+        /* --- Estilos do Conteúdo do Artigo --- */
+        .article-content h1 {
+            font-size: 2.8rem;
+            color: var(--light-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .article-content .metadata {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--light-dark-color);
+            padding-bottom: 1rem;
+        }
+        .article-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 0 0 1.5rem 0;
+        }
+        .article-content h2 {
+            font-size: 1.8rem;
+            color: var(--light-color);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 2.5rem 0 1.5rem 0;
+        }
+        .article-content h3 {
+            font-size: 1.4rem;
+            color: var(--light-color);
+            margin: 2rem 0 1rem 0;
+        }
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 2rem 0;
+            display: block;
+        }
+        .article-content code {
+            background-color: var(--light-dark-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+        }
+        .article-content pre {
+            background-color: var(--light-dark-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto; /* Para blocos de código longos */
+            font-size: 0.9rem;
+        }
+        .article-content blockquote {
+            border-left: 4px solid var(--gray-color);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--gray-color);
+        }
+        .article-content ul, .article-content ol {
+            padding-left: 2rem;
+            line-height: 1.8;
+        }
+
+        /* --- Responsividade --- */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 1.5rem; }
+            .navbar .logo { font-size: 1.5rem; }
+            .navbar .nav-links { display: none; }
+            .article-container { padding: 6rem 1.5rem 2rem 1.5rem; }
+            .article-content h1 { font-size: 2.2rem; }
+            .article-content h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">Portal de Redes</a>
+        <div class="nav-links">
+            <a href="index.html#trilha-ccna">Trilha CCNA</a>
+            <a href="index.html#trilha-seguranca">Segurança</a>
+            <a href="#">Sobre</a>
+        </div>
+    </nav>
+
+    <div class="article-container">
+        <div class="article-content">
+            
+            <!-- INÍCIO DO CONTEÚDO DO SEU ARTIGO -->
+
+            <h1>1. Fundamentos de Redes</h1>
+            <div class="metadata">
+                <span>Publicado em: 21 de novembro de 2025</span> | <span>Trilha: Formação Analista de Redes</span>
+            </div>
+
+            <p>
+                Bem-vindo ao primeiro capítulo da nossa jornada pela certificação CCNA! Neste módulo, vamos desmistificar os conceitos mais fundamentais que formam a base de todas as redes de computadores modernas. Começaremos entendendo o que é uma rede, qual seu propósito e por que ela é tão essencial no mundo digital de hoje.
+            </p>
+
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070" alt="Imagem representando conceitos de rede">
+
+            <h2>O Que é uma Rede?</h2>
+            <p>
+                Em sua forma mais simples, uma rede de computadores é um conjunto de dois ou mais dispositivos (como computadores, servidores, celulares ou impressoras ) conectados entre si para compartilhar recursos e trocar informações. O recurso compartilhado pode ser um arquivo, uma conexão com a internet, uma impressora, etc.
+            </p>
+            <p>
+                Pense na rede como o sistema circulatório do mundo digital. Assim como o sangue transporta oxigênio e nutrientes pelo corpo, a rede transporta dados, permitindo a comunicação e a colaboração em escala global.
+            </p>
+
+            <h2>Modelos de Referência: OSI e TCP/IP</h2>
+            <p>
+                Para garantir que dispositivos de diferentes fabricantes possam se comunicar, a indústria criou modelos de referência. Os dois mais importantes são o Modelo OSI e o Modelo TCP/IP. Eles dividem a complexa tarefa da comunicação em camadas, onde cada camada tem uma função específica.
+            </p>
+            <blockquote>
+                O Modelo OSI tem 7 camadas, enquanto o TCP/IP, mais prático, tem 4 (ou 5, dependendo da interpretação). Para o CCNA, é crucial entender ambos.
+            </blockquote>
+
+            <h3>Exemplo de Bloco de Código</h3>
+            <p>
+                Ao configurar um roteador, você usará uma interface de linha de comando (CLI). Um comando simples para ver as interfaces de rede seria:
+            </p>
+            <pre><code>Router> show ip interface brief</code></pre>
+            <p>
+                Este comando, <code>show ip interface brief</code>, é um dos mais utilizados no dia a dia de um analista de redes.
+            </p>
+
+            <!-- FIM DO CONTEÚDO DO SEU ARTIGO -->
+
+        </div>
+    </div>
+
+</body>
+</html>
