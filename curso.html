@@ -50,6 +50,8 @@
             right: 0;
             height: 10rem;
             background: linear-gradient(to top, var(--dark-color), transparent);
+            /* A CORREÇÃO PARA OS BOTÕES NO CELULAR */
+            pointer-events: none; 
         }
 
         .banner-content h1 {
@@ -182,10 +184,10 @@
         /* --- Responsividade --- */
         @media (max-width: 768px) {
             .course-banner, .course-content { padding: 0 1.5rem; }
-            .course-banner { padding-top: 6rem; height: auto; }
+            .course-banner { padding-top: 6rem; padding-bottom: 2rem; height: auto; }
             .banner-content h1 { font-size: 2.5rem; }
             .action-buttons { display: flex; flex-direction: column; gap: 1rem; }
-            .btn { width: 100%; text-align: center; }
+            .btn { width: 100%; text-align: center; box-sizing: border-box; }
             .episode-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
         }
     </style>
@@ -203,7 +205,7 @@
 
             <div class="action-buttons">
                 <a href="#synopsis-content" class="btn btn-primary">Ler Conteúdo</a>
-                <a href="index.html" class="btn btn-secondary">Voltar</a>
+                <a href="../index.html" class="btn btn-secondary">Voltar</a>
             </div>
 
             <div class="secondary-actions">
