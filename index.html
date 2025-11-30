@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub - Plataforma Educacional</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Botão de menu mobile -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>EduHub</h1>
+                <p>Aprenda com simplicidade</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-category="python">
+                    <span>Python</span>
+                </button>
+                <button class="nav-item" data-category="ccna">
+                    <span>CCNA</span>
+                </button>
+                <button class="nav-item" data-category="ccnp">
+                    <span>CCNP</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <h2 id="categoryTitle">Python</h2>
+                <p>Aprenda no seu próprio ritmo</p>
+            </header>
+
+            <!-- Carousel -->
+            <div class="carousel-section">
+                <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="carousel-container" id="carousel">
+                    <!-- Tópicos serão inseridos aqui via JavaScript -->
+                </div>
+
+                <button class="carousel-btn next" id="nextBtn" aria-label="Próximo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area" id="contentArea">
+                <article id="contentArticle">
+                    <!-- Conteúdo será carregado aqui via JavaScript -->
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
